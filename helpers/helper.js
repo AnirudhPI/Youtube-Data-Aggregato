@@ -53,6 +53,12 @@ async function getVideoEngagementMetrics(videoId) {
         part: 'snippet,statistics',
         id: videoId, 
       });
+
+      if (response.data.items.length === 0) {
+        return {
+          message: "Video not found."
+        };
+      }
   
       const videoDetails = response.data.items[0];
       const { viewCount, likeCount, commentCount } = videoDetails.statistics;
